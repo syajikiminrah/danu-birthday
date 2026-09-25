@@ -1,0 +1,4068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Danu's Memory Archive ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #e9a7c3;
+    --deep-pink: #bd7194;
+    --dark: #765165;
+    --cream: #fffaf7;
+    --paper: #fffdfb;
+    --lavender: #eadcf7;
+    --light-pink: #ffe5ef;
+    --rose: #f4bfd3;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Quicksand", sans-serif;
+    color: var(--dark);
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.95), transparent 20%),
+        radial-gradient(circle at 90% 10%, rgba(242,214,255,.7), transparent 25%),
+        radial-gradient(circle at 70% 60%, rgba(255,213,231,.75), transparent 30%),
+        linear-gradient(135deg, #fff9fb, #ffeaf3, #f7edff);
+}
+
+body.intro-active {
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   PAPER TEXTURE
+========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: .15;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(150,100,120,.04) 0,
+            rgba(150,100,120,.04) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 50% 40%, rgba(255,255,255,.9), transparent 23%),
+        radial-gradient(circle at 15% 20%, #ffeef5, transparent 30%),
+        radial-gradient(circle at 85% 80%, #ead8f6, transparent 30%),
+        linear-gradient(145deg, #f8cada, #f7d8e7, #e8d6f4);
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-orb {
+    position: absolute;
+
+    width: 550px;
+    height: 550px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.3);
+
+    filter: blur(80px);
+
+    animation: orb 5s ease-in-out infinite alternate;
+}
+
+@keyframes orb {
+
+    to {
+        transform: scale(1.25);
+        opacity: .5;
+    }
+
+}
+
+
+/* =========================================================
+   INTRO STARS
+========================================================= */
+
+.intro-star {
+    position: absolute;
+    color: white;
+    opacity: .8;
+
+    animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.star1 {
+    top: 12%;
+    left: 12%;
+    font-size: 25px;
+}
+
+.star2 {
+    top: 18%;
+    right: 15%;
+    font-size: 18px;
+    animation-delay: .7s;
+}
+
+.star3 {
+    bottom: 16%;
+    left: 17%;
+    font-size: 30px;
+    animation-delay: 1.2s;
+}
+
+.star4 {
+    bottom: 20%;
+    right: 10%;
+    font-size: 20px;
+    animation-delay: .3s;
+}
+
+@keyframes twinkle {
+
+    50% {
+        opacity: .25;
+        transform: scale(.7) rotate(15deg);
+    }
+
+}
+
+
+/* =========================================================
+   INTRO START
+========================================================= */
+
+.intro-start {
+    position: relative;
+    z-index: 10;
+
+    text-align: center;
+
+    padding: 25px;
+
+    transition: 1s;
+}
+
+.intro-start.hide {
+    opacity: 0;
+    transform: scale(.9);
+    pointer-events: none;
+}
+
+.intro-mini {
+    letter-spacing: 5px;
+    font-size: .72rem;
+    text-transform: uppercase;
+    color: #a16984;
+}
+
+.intro-start h1 {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+
+    font-size: clamp(4rem, 13vw, 8rem);
+
+    color: white;
+
+    line-height: .95;
+
+    margin: 14px 0;
+
+    text-shadow:
+        0 8px 30px rgba(126,65,94,.17);
+}
+
+.intro-start .handwritten {
+    font-family: "Caveat", cursive;
+
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+
+    color: #97667d;
+}
+
+.begin-btn,
+.open-btn {
+    border: 1px solid rgba(255,255,255,.9);
+
+    background: rgba(255,255,255,.48);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    color: #955f79;
+
+    padding: 15px 30px;
+
+    border-radius: 100px;
+
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+
+    margin-top: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 35px rgba(125,62,92,.14);
+
+    transition: .3s;
+}
+
+.begin-btn:hover,
+.open-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    background: white;
+}
+
+
+/* =========================================================
+   MEMORY SCENES
+========================================================= */
+
+.memory-scene {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 1s ease;
+}
+
+.memory-scene.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   LANDSCAPE POLAROID
+========================================================= */
+
+.intro-polaroid {
+    position: relative;
+
+    width: min(80vw, 650px);
+
+    aspect-ratio: 16 / 10;
+
+    padding: 12px 12px 60px;
+
+    background: white;
+
+    border-radius: 7px;
+
+    box-shadow:
+        0 35px 80px rgba(90,40,66,.25);
+
+    transform:
+        rotate(-3deg)
+        translateY(15px)
+        scale(.86);
+
+    opacity: .3;
+
+    transition:
+        transform 1.5s ease,
+        opacity 1.5s ease;
+
+    z-index: 3;
+}
+
+.memory-scene:nth-of-type(even) .intro-polaroid {
+    transform:
+        rotate(2deg)
+        translateY(15px)
+        scale(.86);
+}
+
+.memory-scene.active .intro-polaroid {
+    transform:
+        rotate(-1deg)
+        translateY(-15px)
+        scale(1);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   PHOTO WINDOW
+========================================================= */
+
+.photo-window {
+    position: relative;
+
+    width: 100%;
+
+    height: calc(100% - 46px);
+
+    overflow: hidden;
+
+    border-radius: 3px;
+
+    background: #f3dce7;
+}
+
+
+/* =========================================================
+   BLURRED PHOTO BACKGROUND
+========================================================= */
+
+.photo-window::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -30px;
+
+    background-image: var(--photo);
+
+    background-size: cover;
+
+    background-position: center;
+
+    filter: blur(25px);
+
+    transform: scale(1.18);
+
+    opacity: .55;
+}
+
+
+/* =========================================================
+   PASTEL OVERLAY
+========================================================= */
+
+.photo-window::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,226,239,.22),
+            transparent 30%,
+            transparent 70%,
+            rgba(236,219,250,.22)
+        );
+}
+
+
+/* =========================================================
+   PORTRAIT PHOTO INSIDE LANDSCAPE POLAROID
+========================================================= */
+
+.photo-window img {
+    position: absolute;
+
+    z-index: 1;
+
+    left: 50%;
+    top: 50%;
+
+    height: 100%;
+    width: auto;
+
+    max-width: none;
+
+    display: block;
+
+    object-fit: contain;
+
+    transform:
+        translate(-50%, -50%);
+
+    box-shadow:
+        0 0 30px rgba(72,31,52,.15);
+}
+
+
+/* =========================================================
+   2021 ONLY
+   MOVE PHOTO DOWN SO HEADS ARE VISIBLE
+========================================================= */
+
+.memory-scene[data-year="2021"] .photo-window img {
+    top: 65%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+/* =========================================================
+   2022 - 2026
+   NORMAL CENTER POSITION
+========================================================= */
+
+.memory-scene:not([data-year="2021"]) .photo-window img {
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+/* =========================================================
+   TAPE
+========================================================= */
+
+.tape {
+    position: absolute;
+
+    width: 115px;
+    height: 30px;
+
+    top: -14px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(-3deg);
+
+    background:
+        rgba(255,214,231,.82);
+
+    z-index: 8;
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,.5);
+}
+
+
+/* =========================================================
+   POLAROID CAPTION
+========================================================= */
+
+.intro-polaroid::after {
+    content: "keep this one ♡";
+
+    position: absolute;
+
+    bottom: 14px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 1.45rem;
+
+    color: #b1708e;
+}
+
+
+/* =========================================================
+   INTRO YEAR
+========================================================= */
+
+.intro-year {
+    position: absolute;
+
+    z-index: 5;
+
+    bottom: 1.5%;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3.2rem, 8vw, 5.5rem);
+
+    color: rgba(255,255,255,.95);
+
+    text-shadow:
+        0 8px 30px rgba(89,38,63,.22);
+
+    letter-spacing: 5px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INTRO NOTE
+========================================================= */
+
+.intro-note {
+    position: absolute;
+
+    right: 8%;
+    top: 16%;
+
+    font-family: "Caveat", cursive;
+
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+
+    color: #9b6680;
+
+    transform: rotate(7deg);
+
+    opacity: 0;
+
+    transition: 1s .7s;
+
+    z-index: 6;
+}
+
+.memory-scene.active .intro-note {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   FINAL INTRO
+========================================================= */
+
+#introFinal {
+    position: absolute;
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 1.2s;
+}
+
+#introFinal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.final-content {
+    padding: 30px;
+}
+
+.final-content small {
+    letter-spacing: 6px;
+    color: #9d6a82;
+}
+
+.final-content h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3.5rem, 11vw, 7rem);
+
+    font-weight: 400;
+
+    color: white;
+
+    line-height: .9;
+
+    margin: 18px 0;
+
+    text-shadow:
+        0 10px 35px rgba(100,40,70,.18);
+}
+
+.final-content h2 {
+    font-family: "Caveat", cursive;
+
+    font-size: 2.4rem;
+
+    color: #9a627c;
+}
+
+.final-content p {
+    letter-spacing: 5px;
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+    min-height: 100svh;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    padding: 60px 20px;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.95), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(238,210,255,.7), transparent 25%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+
+    max-width: 850px;
+}
+
+.archive-pill {
+    display: inline-block;
+
+    background: rgba(255,255,255,.6);
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    border-radius: 100px;
+
+    padding: 9px 20px;
+
+    font-size: .72rem;
+
+    letter-spacing: 3px;
+
+    box-shadow:
+        0 10px 30px rgba(120,70,95,.08);
+}
+
+.hero h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(5rem, 15vw, 10rem);
+
+    line-height: .8;
+
+    font-weight: 400;
+
+    color: #db96b5;
+
+    margin-top: 25px;
+}
+
+.hero h1 span {
+    display: block;
+
+    font-family: "Caveat", cursive;
+
+    font-size: .32em;
+
+    color: #8f6177;
+
+    margin-top: 35px;
+}
+
+.hero-copy {
+    max-width: 570px;
+
+    margin: 35px auto 25px;
+
+    line-height: 2;
+
+    color: #896979;
+}
+
+.hero-hand {
+    font-family: "Caveat", cursive;
+
+    font-size: 1.7rem;
+
+    color: #b57694;
+
+    transform: rotate(-3deg);
+
+    margin-bottom: 30px;
+}
+
+.scroll-link {
+    color: #9b657e;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    border-bottom:
+        1px dashed #ce91ad;
+
+    padding-bottom: 5px;
+}
+
+
+/* =========================================================
+   HERO DOODLES
+========================================================= */
+
+.doodle {
+    position: absolute;
+
+    font-family: "Caveat", cursive;
+
+    color: #c783a3;
+
+    opacity: .65;
+
+    z-index: 2;
+}
+
+.doodle.one {
+    top: 17%;
+    left: 8%;
+
+    font-size: 2rem;
+
+    transform: rotate(-12deg);
+}
+
+.doodle.two {
+    top: 27%;
+    right: 8%;
+
+    font-size: 2.3rem;
+
+    transform: rotate(12deg);
+}
+
+.doodle.three {
+    bottom: 15%;
+    left: 15%;
+
+    font-size: 3rem;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-wrap {
+    padding: 0 7% 100px;
+}
+
+.stats {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    background:
+        rgba(255,255,255,.6);
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border-radius: 35px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 60px rgba(119,67,91,.1);
+}
+
+.stat {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    position: relative;
+}
+
+.stat:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 25%;
+
+    width: 1px;
+    height: 50%;
+
+    background: #ebc8d7;
+}
+
+.stat strong {
+    display: block;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 2.2rem;
+
+    font-weight: 400;
+
+    color: #c57e9e;
+}
+
+.stat span {
+    font-size: .76rem;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section {
+    padding: 100px 7%;
+}
+
+.section-heading {
+    text-align: center;
+
+    margin-bottom: 80px;
+}
+
+.section-heading small {
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: #c184a1;
+
+    font-size: .7rem;
+}
+
+.section-heading h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(3rem, 7vw, 5.5rem);
+
+    color: #86596f;
+}
+
+.section-heading .scribble {
+    font-family: "Caveat", cursive;
+
+    font-size: 1.6rem;
+
+    color: #c67f9f;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.memory-archive {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+.timeline-line {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+    bottom: 0;
+
+    width: 3px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #efbfd2,
+            #d7b9ec,
+            #efbfd2
+        );
+
+    border-radius: 100px;
+
+    opacity: .7;
+}
+
+.timeline-line::after {
+    content: "♡";
+
+    position: absolute;
+
+    bottom: -20px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #f2bed3;
+
+    color: white;
+
+    box-shadow:
+        0 8px 25px rgba(140,75,105,.2);
+}
+
+
+/* =========================================================
+   TIMELINE ROW
+========================================================= */
+
+.memory-row {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 100px 1fr;
+
+    align-items: center;
+
+    margin-bottom: 150px;
+}
+
+.timeline-dot {
+    grid-column: 2;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 5px solid #e7a7c3;
+
+    justify-self: center;
+
+    z-index: 5;
+
+    box-shadow:
+        0 0 0 8px rgba(240,186,211,.18);
+}
+
+.memory-row .photo-side {
+    grid-column: 1;
+}
+
+.memory-row .text-side {
+    grid-column: 3;
+}
+
+.memory-row.reverse .photo-side {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.memory-row.reverse .text-side {
+    grid-column: 1;
+    grid-row: 1;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   TIMELINE SCRAPBOOK PHOTOS
+========================================================= */
+
+.scrap-photo {
+    position: relative;
+
+    width: min(100%, 420px);
+
+    margin: auto;
+
+    padding:
+        12px 12px 60px;
+
+    background: white;
+
+    box-shadow:
+        0 25px 55px rgba(112,58,84,.15);
+
+    transform: rotate(-3deg);
+
+    transition: .4s;
+}
+
+.reverse .scrap-photo {
+    transform: rotate(3deg);
+}
+
+.scrap-photo:hover {
+    transform:
+        rotate(0)
+        translateY(-8px)
+        scale(1.02);
+}
+
+.scrap-photo img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+.scrap-caption {
+    position: absolute;
+
+    left: 0;
+    bottom: 15px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 1.4rem;
+
+    color: #a66c88;
+}
+
+.scrap-tape {
+    position: absolute;
+
+    top: -14px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(-5deg);
+
+    width: 100px;
+    height: 28px;
+
+    background:
+        rgba(247,201,220,.72);
+
+    z-index: 4;
+}
+
+.reverse .scrap-tape {
+    transform:
+        translateX(-50%)
+        rotate(5deg);
+
+    background:
+        rgba(223,205,245,.8);
+}
+
+
+/* =========================================================
+   STICKERS
+========================================================= */
+
+.sticker {
+    position: absolute;
+
+    z-index: 7;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(100,50,75,.1)
+        );
+}
+
+.sticker-heart {
+    right: -20px;
+    bottom: 45px;
+
+    font-size: 3rem;
+
+    color: #e899b9;
+
+    transform: rotate(12deg);
+}
+
+.sticker-star {
+    left: -20px;
+    top: 50px;
+
+    font-size: 2.3rem;
+
+    color: #d3aee8;
+
+    transform: rotate(-15deg);
+}
+
+
+/* =========================================================
+   TIMELINE TEXT
+========================================================= */
+
+.memory-year {
+    font-family: "DM Serif Display", serif;
+
+    font-size:
+        clamp(4.5rem, 9vw, 7rem);
+
+    line-height: .8;
+
+    color: #edbdd1;
+}
+
+.text-side h3 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-weight: 400;
+
+    font-size: 2rem;
+
+    color: #875970;
+
+    margin: 20px 0 15px;
+}
+
+.text-side p {
+    line-height: 1.9;
+
+    color: #886a79;
+}
+
+.hand-note {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 1.55rem;
+
+    color: #bf7898;
+
+    transform: rotate(-3deg);
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery-section {
+    position: relative;
+
+    background:
+        rgba(255,255,255,.38);
+
+    overflow: hidden;
+}
+
+.gallery-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 35px;
+
+    align-items: start;
+}
+
+.gallery-polaroid {
+    padding:
+        10px 10px 48px;
+
+    background: white;
+
+    box-shadow:
+        0 20px 45px rgba(111,62,85,.13);
+
+    position: relative;
+
+    transition: .4s;
+}
+
+.gallery-polaroid:nth-child(1) {
+    transform: rotate(-4deg);
+}
+
+.gallery-polaroid:nth-child(2) {
+    transform:
+        rotate(2deg)
+        translateY(20px);
+}
+
+.gallery-polaroid:nth-child(3) {
+    transform: rotate(-2deg);
+}
+
+.gallery-polaroid:nth-child(4) {
+    transform: rotate(3deg);
+}
+
+.gallery-polaroid:nth-child(5) {
+    transform:
+        rotate(-3deg)
+        translateY(20px);
+}
+
+.gallery-polaroid:nth-child(6) {
+    transform: rotate(4deg);
+}
+
+.gallery-polaroid:hover {
+    transform:
+        rotate(0)
+        translateY(-8px)
+        scale(1.03);
+
+    z-index: 5;
+}
+
+.gallery-polaroid img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+.gallery-polaroid span {
+    position: absolute;
+
+    bottom: 12px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 1.25rem;
+
+    color: #a46c86;
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter-area {
+    text-align: center;
+}
+
+.envelope {
+    max-width: 780px;
+
+    margin: auto;
+
+    position: relative;
+
+    padding-top: 30px;
+}
+
+.letter-paper {
+    position: relative;
+
+    background:
+        repeating-linear-gradient(
+            transparent,
+            transparent 37px,
+            rgba(220,183,200,.22) 38px
+        ),
+        #fffdfb;
+
+    padding:
+        75px 70px 70px;
+
+    text-align: left;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 35px 80px rgba(112,57,84,.15);
+
+    transform: rotate(-1deg);
+}
+
+.letter-paper::before {
+    content: "";
+
+    position: absolute;
+
+    left: 55px;
+    top: 0;
+    bottom: 0;
+
+    width: 1px;
+
+    background:
+        rgba(236,154,188,.35);
+}
+
+.letter-paper h2 {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 3.2rem;
+
+    color: #a96484;
+
+    margin-bottom: 30px;
+}
+
+.letter-paper p {
+    position: relative;
+
+    z-index: 2;
+
+    line-height: 2.35;
+
+    margin-bottom: 12px;
+}
+
+.signature {
+    margin-top: 30px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2rem;
+
+    color: #c17496;
+}
+
+.wax {
+    position: absolute;
+
+    width: 72px;
+    height: 72px;
+
+    right: 35px;
+    top: -5px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ee9abb,
+            #c96f94
+        );
+
+    display: grid;
+    place-items: center;
+
+    color: white;
+
+    font-size: 2rem;
+
+    z-index: 4;
+
+    box-shadow:
+        0 8px 20px rgba(135,60,93,.2);
+}
+
+
+/* =========================================================
+   CHAPTER 21
+========================================================= */
+
+.chapter {
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff,
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            transparent,
+            #f4cada
+        );
+}
+
+.chapter-content {
+    position: relative;
+
+    z-index: 3;
+}
+
+.chapter-small {
+    letter-spacing: 6px;
+
+    font-size: .75rem;
+
+    color: #a9748d;
+}
+
+.chapter h2 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(4rem, 10vw, 8rem);
+
+    line-height: .9;
+
+    color: #d58ba9;
+
+    margin: 20px 0;
+}
+
+.chapter-hand {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2rem;
+
+    color: #93667a;
+}
+
+.chapter-date {
+    margin-top: 25px;
+
+    letter-spacing: 5px;
+
+    font-size: .8rem;
+}
+
+
+/* =========================================================
+   ENDING
+========================================================= */
+
+.continue-section {
+    text-align: center;
+
+    padding: 120px 20px;
+
+    background: #f4cada;
+}
+
+.continue-section h3 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(2.5rem, 6vw, 4.5rem);
+
+    color: white;
+}
+
+.continue-section p {
+    margin: 20px auto;
+
+    max-width: 600px;
+
+    line-height: 1.8;
+
+    color: #8e6076;
+}
+
+.future-line {
+    margin: 35px auto 15px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size:
+        clamp(1.3rem, 4vw, 2rem);
+
+    color: #9c637e;
+}
+
+.to-be {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2rem;
+
+    color: white;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+
+    background: #f4cada;
+
+    padding:
+        25px 20px 40px;
+
+    color: #9e6a82;
+
+    font-size: .8rem;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.floating-heart {
+    position: fixed;
+
+    bottom: -30px;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    color:
+        rgba(224,128,169,.45);
+
+    animation:
+        heartRise linear forwards;
+}
+
+@keyframes heartRise {
+
+    to {
+        transform:
+            translateY(-115vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music-control {
+    position: fixed;
+
+    left: 22px;
+
+    bottom:
+        calc(
+            22px +
+            env(safe-area-inset-bottom)
+        );
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    border: 2px solid white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #ffe2ee,
+            #eee0fa
+        );
+
+    box-shadow:
+        0 12px 30px rgba(127,67,95,.2);
+
+    color: #ad6d8b;
+
+    font-size: 23px;
+
+    display: grid;
+    place-items: center;
+
+    cursor: pointer;
+
+    z-index: 700;
+
+    transition: .3s;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+}
+
+body.intro-active .music-control {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   VISIBLE BUNNY
+========================================================= */
+
+.bunny-wrap {
+    position: fixed;
+
+    right: 18px;
+
+    bottom:
+        calc(
+            18px +
+            env(safe-area-inset-bottom)
+        );
+
+    z-index: 800;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.bunny-label {
+    background:
+        rgba(255,255,255,.92);
+
+    padding: 8px 12px;
+
+    border-radius: 100px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 1.05rem;
+
+    color: #ae6b8b;
+
+    box-shadow:
+        0 8px 25px rgba(130,70,100,.13);
+
+    animation:
+        labelPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+}
+
+.jk-secret {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #ffd8e9,
+            #eadcff
+        );
+
+    box-shadow:
+        0 12px 35px rgba(147,72,109,.27),
+        0 0 28px rgba(255,171,208,.55);
+
+    display: grid;
+    place-items: center;
+
+    font-size: 37px;
+
+    cursor: pointer;
+
+    animation:
+        bunnyBounce 2.3s ease-in-out infinite;
+
+    position: relative;
+}
+
+.jk-secret::before,
+.jk-secret::after {
+    content: "✦";
+
+    position: absolute;
+
+    color: #efa7c6;
+
+    font-size: 12px;
+
+    animation:
+        twinkle 1.8s infinite;
+}
+
+.jk-secret::before {
+    top: -8px;
+    left: 4px;
+}
+
+.jk-secret::after {
+    right: -5px;
+    top: 8px;
+
+    animation-delay: .7s;
+}
+
+@keyframes bunnyBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+body.intro-active .bunny-wrap {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   JUNGKOOK POPUP
+========================================================= */
+
+.jk-popup {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+
+    height: 100vh;
+    height: 100dvh;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        max(
+            10px,
+            env(safe-area-inset-top)
+        )
+        10px
+        max(
+            10px,
+            env(safe-area-inset-bottom)
+        );
+
+    background:
+        rgba(86,43,65,.6);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: .35s;
+
+    overflow: hidden;
+}
+
+.jk-popup.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.jk-window {
+    position: relative;
+
+    width:
+        min(94vw,450px);
+
+    height:
+        calc(100vh - 20px);
+
+    height:
+        calc(
+            100dvh
+            - 20px
+            - env(safe-area-inset-top)
+            - env(safe-area-inset-bottom)
+        );
+
+    max-height: 850px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffafd,
+            #ffe4f0,
+            #f7e5ff
+        );
+
+    box-shadow:
+        0 30px 100px rgba(66,24,46,.35);
+}
+
+.jk-scroll {
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    overscroll-behavior: contain;
+
+    padding:
+        55px
+        28px
+        calc(
+            120px +
+            env(safe-area-inset-bottom)
+        );
+
+    text-align: center;
+
+    scrollbar-width: none;
+}
+
+.jk-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.jk-close {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    width: 44px;
+    height: 44px;
+
+    z-index: 100;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.94);
+
+    box-shadow:
+        0 5px 20px rgba(116,75,96,.12);
+
+    color: #9d607d;
+
+    font-size: 27px;
+
+    cursor: pointer;
+}
+
+.jk-sparkle {
+    color: #e59abb;
+
+    letter-spacing: 8px;
+
+    margin-bottom: 15px;
+}
+
+.jk-small {
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #b07692;
+
+    margin-bottom: 15px;
+}
+
+.jk-window h2 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(2.2rem,9vw,3rem);
+
+    line-height: .95;
+
+    font-weight: 400;
+
+    color: #d47da5;
+
+    margin-bottom: 30px;
+}
+
+.jk-photo {
+    width: 88%;
+
+    margin:
+        0 auto 35px;
+
+    padding:
+        9px 9px 42px;
+
+    background: white;
+
+    box-shadow:
+        0 18px 45px rgba(128,68,96,.18);
+
+    transform: rotate(-2deg);
+}
+
+.jk-photo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+.jk-warning {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #d36e9c;
+
+    margin-bottom: 18px;
+}
+
+.jk-text {
+    color: #835f71;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin:
+        0 auto 25px;
+
+    max-width: 350px;
+}
+
+.jk-side-effects {
+    padding: 22px 16px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    color: #93687c;
+
+    font-size: 13px;
+
+    line-height: 2;
+}
+
+.jk-side-effects strong {
+    display: block;
+
+    color: #bd7596;
+
+    margin-bottom: 8px;
+}
+
+.jk-side-effects span {
+    display: block;
+}
+
+.jk-divider {
+    margin: 25px 0;
+
+    color: #e296b8;
+
+    font-size: 26px;
+}
+
+.jk-final {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size: 1.7rem;
+
+    color: #ad6688;
+
+    line-height: 1.3;
+
+    margin-bottom: 18px;
+}
+
+.jk-from {
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #9b7788;
+}
+
+.jk-lol {
+    font-size: 28px;
+
+    margin-top: 20px;
+}
+
+.jk-bottom-space {
+    height: 160px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:800px) {
+
+    section {
+        padding:
+            80px 22px;
+    }
+
+    .stats {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .stat:nth-child(2)::after {
+        display: none;
+    }
+
+    .timeline-line {
+        left: 22px;
+    }
+
+    .memory-row,
+    .memory-row.reverse {
+
+        display: grid;
+
+        grid-template-columns:
+            45px 1fr;
+
+        gap: 15px;
+
+        margin-bottom: 120px;
+    }
+
+    .timeline-dot,
+    .memory-row.reverse .timeline-dot {
+
+        grid-column: 1;
+        grid-row: 1;
+
+        align-self: center;
+    }
+
+    .memory-row .photo-side,
+    .memory-row.reverse .photo-side {
+
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .memory-row .text-side,
+    .memory-row.reverse .text-side {
+
+        grid-column: 2;
+        grid-row: 2;
+
+        text-align: left;
+    }
+
+    .gallery-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .letter-paper {
+        padding:
+            65px 35px 55px 55px;
+    }
+
+    .letter-paper::before {
+        left: 38px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:520px) {
+
+    .intro-polaroid {
+
+        width: 90vw;
+
+        aspect-ratio: 16 / 10;
+
+        padding:
+            8px
+            8px
+            48px;
+    }
+
+    .photo-window {
+
+        height:
+            calc(100% - 36px);
+    }
+
+
+    /* 2021 DOWN ON MOBILE TOO */
+
+    .memory-scene[data-year="2021"]
+    .photo-window img {
+
+        top: 65%;
+    }
+
+
+    /* OTHER YEARS CENTER */
+
+    .memory-scene:not([data-year="2021"])
+    .photo-window img {
+
+        top: 50%;
+    }
+
+
+    .intro-note {
+
+        top: 7%;
+        right: 5%;
+
+        font-size: 1.3rem;
+    }
+
+    .intro-year {
+
+        bottom: 2%;
+
+        font-size: 3.4rem;
+    }
+
+    .hero h1 {
+        font-size: 5rem;
+    }
+
+    .stats-wrap {
+
+        padding:
+            0 18px 70px;
+    }
+
+    .stats {
+        border-radius: 25px;
+    }
+
+    .stat {
+
+        padding:
+            25px 10px;
+    }
+
+    .stat strong {
+        font-size: 1.8rem;
+    }
+
+    .stat span {
+        font-size: .65rem;
+    }
+
+    .gallery-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 55px;
+    }
+
+    .gallery-polaroid {
+
+        max-width: 330px;
+
+        margin: auto;
+    }
+
+    .letter-paper {
+
+        padding:
+            65px 24px 45px 45px;
+    }
+
+    .letter-paper::before {
+        left: 30px;
+    }
+
+    .letter-paper h2 {
+        font-size: 2.7rem;
+    }
+
+    .bunny-wrap {
+
+        right: 12px;
+
+        bottom:
+            calc(
+                12px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .bunny-label {
+
+        font-size: .9rem;
+
+        padding:
+            7px 9px;
+    }
+
+    .jk-secret {
+
+        width: 68px;
+        height: 68px;
+
+        font-size: 32px;
+    }
+
+    .music-control {
+
+        left: 15px;
+
+        bottom:
+            calc(
+                15px +
+                env(safe-area-inset-bottom)
+            );
+
+        width: 55px;
+        height: 55px;
+    }
+
+    .jk-popup {
+
+        padding:
+            max(
+                8px,
+                env(safe-area-inset-top)
+            )
+            8px
+            max(
+                8px,
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .jk-window {
+
+        width: 100%;
+
+        height:
+            calc(100vh - 16px);
+
+        height:
+            calc(
+                100dvh
+                - 16px
+                - env(safe-area-inset-top)
+                - env(safe-area-inset-bottom)
+            );
+
+        border-radius: 28px;
+    }
+
+    .jk-scroll {
+
+        padding:
+            58px
+            20px
+            calc(
+                150px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .jk-bottom-space {
+        height: 180px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body class="intro-active">
+
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio
+    id="memoryMusic"
+    preload="auto"
+    loop>
+
+    <source
+        src="danu-memory.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div id="intro">
+
+    <div class="intro-orb"></div>
+
+    <span class="intro-star star1">✦</span>
+    <span class="intro-star star2">♡</span>
+    <span class="intro-star star3">✧</span>
+    <span class="intro-star star4">♡</span>
+
+
+    <!-- START -->
+
+    <div
+        class="intro-start"
+        id="introStart">
+
+        <div class="intro-mini">
+            A LITTLE PLACE MADE FOR
+        </div>
+
+        <h1>
+            Danu ♡
+        </h1>
+
+        <div class="handwritten">
+            some memories deserve to stay
+        </div>
+
+        <button
+            class="begin-btn"
+            onclick="startMemories()">
+
+            Open the archive ♡
+
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         2021
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2021">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2021.jpg')">
+
+                <img
+                    src="2021.jpg"
+                    alt="2021 memory">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            it started here ♡
+        </div>
+
+
+        <div class="intro-year">
+            2021
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2022
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2022">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2022.jpg')">
+
+                <img
+                    src="2022.jpg"
+                    alt="2022 memory">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            another chapter ✿
+        </div>
+
+
+        <div class="intro-year">
+            2022
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2023
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2023">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2023.jpg')">
+
+                <img
+                    src="2023.jpg"
+                    alt="2023 memory">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            core memory ♡
+        </div>
+
+
+        <div class="intro-year">
+            2023
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2024
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2024">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2024.jpg')">
+
+                <img
+                    src="2024.jpg"
+                    alt="Danu in 2024">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            Danu being Danu ♡
+        </div>
+
+
+        <div class="intro-year">
+            2024
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2025
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2025">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2025.jpg')">
+
+                <img
+                    src="2025.jpg"
+                    alt="2025 memory">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            keep this forever ↗
+        </div>
+
+
+        <div class="intro-year">
+            2025
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2026
+    ================================================== -->
+
+    <div
+        class="memory-scene"
+        data-year="2026">
+
+        <div class="intro-polaroid">
+
+            <div class="tape"></div>
+
+            <div
+                class="photo-window"
+                style="--photo:url('2026.jpg')">
+
+                <img
+                    src="2026.jpg"
+                    alt="2026 memory">
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-note">
+            and somehow... here we are ♡
+        </div>
+
+
+        <div class="intro-year">
+            2026
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FINAL INTRO
+    ================================================== -->
+
+    <div id="introFinal">
+
+        <div class="final-content">
+
+            <small>
+                2021 — 2026
+            </small>
+
+            <h1>
+                Happy Birthday
+                <br>
+                Danu ♡
+            </h1>
+
+            <h2>
+                Chapter 21 begins
+            </h2>
+
+            <p>
+                28 • 09 • 2026
+            </p>
+
+            <button
+                class="open-btn"
+                onclick="openWebsite()">
+
+                Enter your memories ♡
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="doodle one">
+        ✿ memories!
+    </div>
+
+    <div class="doodle two">
+        ♡ keep forever
+    </div>
+
+    <div class="doodle three">
+        ↝ ♡
+    </div>
+
+
+    <div class="hero-content">
+
+        <div class="archive-pill">
+            DANU'S MEMORY ARCHIVE • 2021—2026
+        </div>
+
+
+        <h1>
+
+            DANU
+
+            <span>
+                twenty one looks good on you ♡
+            </span>
+
+        </h1>
+
+
+        <p class="hero-copy">
+
+            A tiny corner of the internet filled with
+            pictures, laughter, random moments and
+            memories that somehow became part of our story.
+
+        </p>
+
+
+        <div class="hero-hand">
+            made especially for you — Sofia ♡
+        </div>
+
+
+        <a
+            href="#timeline"
+            class="scroll-link">
+
+            go back in time ↓
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats-wrap">
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <strong>
+                5+
+            </strong>
+
+            <span>
+                YEARS OF MEMORIES
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                6
+            </strong>
+
+            <span>
+                CHAPTERS
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                ∞
+            </strong>
+
+            <span>
+                QUESTIONABLE PHOTOS
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                1
+            </strong>
+
+            <span>
+                DANU ♡
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TIMELINE
+===================================================== -->
+
+<section id="timeline">
+
+    <div class="section-heading">
+
+        <small>
+            THE ARCHIVE
+        </small>
+
+        <h2>
+            Through the Years
+        </h2>
+
+        <div class="scribble">
+            scroll slowly... we're going back ♡
+        </div>
+
+    </div>
+
+
+    <div class="memory-archive">
+
+        <div class="timeline-line"></div>
+
+
+        <!-- 2021 -->
+
+        <div class="memory-row">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-heart">
+                        ♡
+                    </div>
+
+                    <img
+                        src="2021.jpg"
+                        alt="2021 memory">
+
+                    <div class="scrap-caption">
+                        where it all begins ♡
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2021
+                </div>
+
+                <h3>
+                    Where these memories begin.
+                </h3>
+
+                <p>
+
+                    The beginning of this little archive.
+                    One picture, one year, and the start
+                    of so many memories that would come after.
+
+                </p>
+
+                <div class="hand-note">
+                    → little did we know...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2022 -->
+
+        <div class="memory-row reverse">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-star">
+                        ✦
+                    </div>
+
+                    <img
+                        src="2022.jpg"
+                        alt="2022 memory">
+
+                    <div class="scrap-caption">
+                        another year together ✿
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2022
+                </div>
+
+                <h3>
+                    Another hundred little moments.
+                </h3>
+
+                <p>
+
+                    More pictures. More conversations.
+                    More completely random moments that
+                    somehow became memories worth keeping.
+
+                </p>
+
+                <div class="hand-note">
+                    definitely no embarrassing photos here...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2023 -->
+
+        <div class="memory-row">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-heart">
+                        ✿
+                    </div>
+
+                    <img
+                        src="2023.jpg"
+                        alt="2023 memory">
+
+                    <div class="scrap-caption">
+                        core memory unlocked ♡
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2023
+                </div>
+
+                <h3>
+                    Different days. Same us.
+                </h3>
+
+                <p>
+
+                    Some of the moments we remember most
+                    weren't planned at all. They were simply
+                    ordinary days that became special later.
+
+                </p>
+
+                <div class="hand-note">
+                    keep this one forever ↗
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2024 -->
+
+        <div class="memory-row reverse">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-star">
+                        ♡
+                    </div>
+
+                    <img
+                        src="2024.jpg"
+                        alt="Danu 2024">
+
+                    <div class="scrap-caption">
+                        Danu • 2024 ♡
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2024
+                </div>
+
+                <h3>
+                    A little Danu moment ♡
+                </h3>
+
+                <p>
+
+                    One year, one picture,
+                    and another page that belongs
+                    right here in the archive.
+
+                </p>
+
+                <div class="hand-note">
+                    pretty girl alert !! ♡
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2025 -->
+
+        <div class="memory-row">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-heart">
+                        ♡
+                    </div>
+
+                    <img
+                        src="2025.jpg"
+                        alt="2025 memory">
+
+                    <div class="scrap-caption">
+                        another one for the archive
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2025
+                </div>
+
+                <h3>
+                    And the memories continued.
+                </h3>
+
+                <p>
+
+                    Another chapter filled with moments
+                    that probably felt completely normal
+                    when they happened — and somehow
+                    became memories anyway.
+
+                </p>
+
+                <div class="hand-note">
+                    DO NOT DELETE THIS PHOTO 😭
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2026 -->
+
+        <div class="memory-row reverse">
+
+            <div class="photo-side">
+
+                <div class="scrap-photo">
+
+                    <div class="scrap-tape"></div>
+
+                    <div class="sticker sticker-star">
+                        ✦
+                    </div>
+
+                    <img
+                        src="2026.jpg"
+                        alt="2026 memory">
+
+                    <div class="scrap-caption">
+                        look at us now ♡
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="text-side">
+
+                <div class="memory-year">
+                    2026
+                </div>
+
+                <h3>
+                    And somehow... here we are.
+                </h3>
+
+                <p>
+
+                    Five years later, another picture
+                    joins the collection. And the best
+                    part is that this isn't the last one.
+
+                </p>
+
+                <div class="hand-note">
+                    chapter 21 starts here ♡
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<section class="gallery-section">
+
+    <div class="section-heading">
+
+        <small>
+            KEEP THESE FOREVER
+        </small>
+
+        <h2>
+            Little Moments ♡
+        </h2>
+
+        <div class="scribble">
+            a tiny wall of memories
+        </div>
+
+    </div>
+
+
+    <div class="gallery-grid">
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2021.jpg"
+                alt="2021">
+
+            <span>
+                2021 ♡
+            </span>
+
+        </div>
+
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2022.jpg"
+                alt="2022">
+
+            <span>
+                2022 ✿
+            </span>
+
+        </div>
+
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2023.jpg"
+                alt="2023">
+
+            <span>
+                2023 ♡
+            </span>
+
+        </div>
+
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2024.jpg"
+                alt="2024">
+
+            <span>
+                2024 ✦
+            </span>
+
+        </div>
+
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2025.jpg"
+                alt="2025">
+
+            <span>
+                2025 ♡
+            </span>
+
+        </div>
+
+
+        <div class="gallery-polaroid">
+
+            <img
+                src="2026.jpg"
+                alt="2026">
+
+            <span>
+                2026 ✿
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LETTER
+===================================================== -->
+
+<section class="letter-area">
+
+    <div class="section-heading">
+
+        <small>
+            ONE MORE THING
+        </small>
+
+        <h2>
+            A Letter for You
+        </h2>
+
+        <div class="scribble">
+            from Sofia ♡
+        </div>
+
+    </div>
+
+
+    <div class="envelope">
+
+        <div class="wax">
+            ♡
+        </div>
+
+
+        <div class="letter-paper">
+
+            <h2>
+                Dear Danu,
+            </h2>
+
+
+            <p>
+                Happy 21st birthday ♡
+            </p>
+
+
+            <p>
+
+                I made this little website because somehow
+                a normal birthday message didn't feel like
+                enough for all the memories we've collected
+                over the years.
+
+            </p>
+
+
+            <p>
+
+                From 2021 to 2026, there have been so many
+                random moments, pictures, conversations and
+                memories that became part of our story
+                without us even realizing it.
+
+            </p>
+
+
+            <p>
+
+                I hope when you look through this, you
+                remember not only the pictures, but everything
+                happening behind them — the laughter, the chaos,
+                and all the little moments we probably thought
+                were completely ordinary at the time.
+
+            </p>
+
+
+            <p>
+
+                Here's to 21, and to all the memories
+                we haven't made yet.
+
+            </p>
+
+
+            <div class="signature">
+
+                With love,
+                <br>
+                Sofia ♡
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CHAPTER 21
+===================================================== -->
+
+<section class="chapter">
+
+    <div class="chapter-content">
+
+        <div class="chapter-small">
+            20 CHAPTERS COMPLETED
+        </div>
+
+        <h2>
+            Chapter 21
+        </h2>
+
+        <div class="chapter-hand">
+            begins now ♡
+        </div>
+
+        <div class="chapter-date">
+            28 • 09 • 2026
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ENDING
+===================================================== -->
+
+<section class="continue-section">
+
+    <h3>
+        This archive isn't finished.
+    </h3>
+
+
+    <p>
+
+        There are still pictures we haven't taken,
+        places we haven't gone, jokes we haven't made
+        and memories we don't even know are waiting for us yet.
+
+    </p>
+
+
+    <div class="future-line">
+
+        2021 ─ 2022 ─ 2023 ─
+        2024 ─ 2025 ─ 2026 ─ ♡ ─ ?
+
+    </div>
+
+
+    <div class="to-be">
+        to be continued...
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    Made with ♡ for Danu • Sofia • 2026
+
+</footer>
+
+
+<!-- =====================================================
+     MUSIC BUTTON
+===================================================== -->
+
+<button
+    class="music-control"
+    id="musicButton"
+    onclick="toggleMusic()"
+    aria-label="Music">
+
+    ♫
+
+</button>
+
+
+<!-- =====================================================
+     VISIBLE BUNNY
+===================================================== -->
+
+<div class="bunny-wrap">
+
+    <div class="bunny-label">
+        tap me ♡
+    </div>
+
+
+    <button
+        class="jk-secret"
+        onclick="openJungkook()"
+        aria-label="Open surprise">
+
+        🐰
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     JUNGKOOK POPUP
+===================================================== -->
+
+<div
+    class="jk-popup"
+    id="jkPopup">
+
+    <div class="jk-window">
+
+
+        <button
+            class="jk-close"
+            onclick="closeJungkook()"
+            aria-label="Close">
+
+            ×
+
+        </button>
+
+
+        <div class="jk-scroll">
+
+
+            <div class="jk-sparkle">
+                ✦ ♡ ✦
+            </div>
+
+
+            <p class="jk-small">
+                DANU'S EMERGENCY HAPPINESS KIT
+            </p>
+
+
+            <h2>
+
+                EMERGENCY
+                <br>
+                JUNGKOOK 🐰
+
+            </h2>
+
+
+            <div class="jk-photo">
+
+                <img
+                    src="jungkook.jpg"
+                    alt="Birthday surprise">
+
+            </div>
+
+
+            <p class="jk-warning">
+
+                🚨 IMPORTANT MEDICAL NOTICE 🚨
+
+            </p>
+
+
+            <p class="jk-text">
+
+                Doctor's orders:
+                one Jungkook a day to maintain
+                maximum happiness levels.
+
+            </p>
+
+
+            <div class="jk-side-effects">
+
+                <strong>
+                    Possible side effects:
+                </strong>
+
+                <span>
+                    ♡ uncontrollable smiling
+                </span>
+
+                <span>
+                    ♡ screaming
+                </span>
+
+                <span>
+                    ♡ staring at the screen
+                </span>
+
+                <span>
+                    ♡ temporary delusion
+                </span>
+
+                <span>
+                    ♡ saying "OMG JUNGKOOK" repeatedly
+                </span>
+
+            </div>
+
+
+            <div class="jk-divider">
+                ♡
+            </div>
+
+
+            <p class="jk-final">
+
+                Happy 21st Birthday,
+                <br>
+                Danu ♡
+
+            </p>
+
+
+            <p class="jk-from">
+
+                From Sofia...
+
+                <br><br>
+
+                and this man who has absolutely
+                no idea this website exists.
+
+            </p>
+
+
+            <div class="jk-lol">
+                😭💗
+            </div>
+
+
+            <div class="jk-bottom-space"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   REFERENCES
+========================================================= */
+
+const scenes =
+    document.querySelectorAll(
+        ".memory-scene"
+    );
+
+const introStart =
+    document.getElementById(
+        "introStart"
+    );
+
+const introFinal =
+    document.getElementById(
+        "introFinal"
+    );
+
+const intro =
+    document.getElementById(
+        "intro"
+    );
+
+const music =
+    document.getElementById(
+        "memoryMusic"
+    );
+
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
+
+const jkPopup =
+    document.getElementById(
+        "jkPopup"
+    );
+
+let currentScene = 0;
+
+
+/* =========================================================
+   START INTRO
+========================================================= */
+
+function startMemories() {
+
+    music.volume = 0.7;
+
+    music.play()
+        .then(() => {
+
+            musicButton.textContent =
+                "♫";
+
+        })
+        .catch(() => {});
+
+
+    introStart
+        .classList
+        .add("hide");
+
+
+    setTimeout(
+        playScene,
+        900
+    );
+
+}
+
+
+/* =========================================================
+   PLAY MEMORY SCENES
+========================================================= */
+
+function playScene() {
+
+    if (currentScene > 0) {
+
+        scenes[
+            currentScene - 1
+        ]
+        .classList
+        .remove("active");
+
+    }
+
+
+    if (
+        currentScene <
+        scenes.length
+    ) {
+
+        scenes[
+            currentScene
+        ]
+        .classList
+        .add("active");
+
+
+        currentScene++;
+
+
+        setTimeout(
+            playScene,
+            4200
+        );
+
+    }
+
+    else {
+
+        setTimeout(() => {
+
+            introFinal
+                .classList
+                .add("active");
+
+        }, 700);
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN WEBSITE
+========================================================= */
+
+function openWebsite() {
+
+    intro
+        .classList
+        .add("hide");
+
+
+    document.body
+        .classList
+        .remove("intro-active");
+
+
+    setTimeout(() => {
+
+        intro.style.display =
+            "none";
+
+    }, 1300);
+
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play();
+
+        musicButton.textContent =
+            "♫";
+
+    }
+
+    else {
+
+        music.pause();
+
+        musicButton.textContent =
+            "▶";
+
+    }
+
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+function createHeart() {
+
+    if (
+        document.body
+        .classList
+        .contains("intro-active")
+    ) {
+
+        return;
+
+    }
+
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+
+    heart.className =
+        "floating-heart";
+
+
+    heart.textContent =
+        Math.random() > .5
+        ? "♡"
+        : "✦";
+
+
+    heart.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    heart.style.fontSize =
+        (
+            Math.random() * 14 +
+            10
+        ) +
+        "px";
+
+
+    heart.style.animationDuration =
+        (
+            Math.random() * 4 +
+            7
+        ) +
+        "s";
+
+
+    document.body
+        .appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 11000);
+
+}
+
+
+setInterval(
+    createHeart,
+    1200
+);
+
+
+/* =========================================================
+   JUNGKOOK POPUP
+========================================================= */
+
+function openJungkook() {
+
+    const scrollArea =
+        jkPopup.querySelector(
+            ".jk-scroll"
+        );
+
+
+    jkPopup
+        .classList
+        .add("active");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    scrollArea.scrollTop = 0;
+
+}
+
+
+function closeJungkook() {
+
+    jkPopup
+        .classList
+        .remove("active");
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE POPUP
+========================================================= */
+
+jkPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeJungkook();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESCAPE TO CLOSE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeJungkook();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
