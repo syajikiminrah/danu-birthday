@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Danu's Memory Archive ♡</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #fff 0, transparent 25%),
+        radial-gradient(circle at 80% 30%, #ffe2ee 0, transparent 30%),
+        linear-gradient(135deg, #fff8fb, #ffeaf3, #f7eaff);
+    color: #744b60;
+    overflow-x: hidden;
+}
+
+body.intro-active {
+    overflow: hidden;
+}
+
+/* INTRO */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background:
+        radial-gradient(circle at center,
+        #ffedf5 0%,
+        #fbd5e5 45%,
+        #eabed5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.38);
+    filter: blur(70px);
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    50% {
+        transform: scale(1.2);
+        opacity: .7;
+    }
+}
+
+/* INTRO START */
+
+.intro-start {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    transition: 1s;
+}
+
+.intro-start.hide {
+    opacity: 0;
+    transform: scale(.92);
+    pointer-events: none;
+}
+
+.intro-start small {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #a76d89;
+}
+
+.intro-start h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem,10vw,7rem);
+    font-weight: 400;
+    color: white;
+    text-shadow: 0 5px 30px rgba(129,54,89,.18);
+    margin: 10px 0;
+}
+
+.intro-start p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #8e6076;
+}
+
+/* BUTTONS */
+
+.begin-btn,
+.open-btn {
+    margin-top: 30px;
+    border: 1px solid rgba(255,255,255,.8);
+    background: rgba(255,255,255,.42);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 14px 28px;
+    border-radius: 50px;
+    color: #8b526e;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 35px rgba(143,76,107,.12);
+    transition: .3s;
+}
+
+.begin-btn:hover,
+.open-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: white;
+}
+
+/* MEMORY INTRO */
+
+.memory-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+}
+
+.memory-scene.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.memory-photo {
+    position: absolute;
+    width: min(72vw,470px);
+    height: min(67vh,590px);
+    padding: 12px 12px 70px;
+    background: #fffdfd;
+    border-radius: 6px;
+    box-shadow:
+        0 30px 70px rgba(102,47,75,.25),
+        0 0 0 1px rgba(255,255,255,.8);
+    transform: rotate(-3deg) scale(.88);
+    transition: 1.5s ease;
+    overflow: hidden;
+}
+
+.memory-scene.active .memory-photo {
+    transform: rotate(-1deg) scale(1);
+}
+
+/* ★ FACE CROPPING FIX ★ */
+
+.memory-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Keeps the upper part of photos visible */
+    object-position: center top;
+
+    border-radius: 3px;
+}
+
+/* Individual positioning if needed later */
+
+.memory-scene:nth-of-type(3) .memory-photo img {
+    object-position: center top;
+}
+
+.memory-scene:nth-of-type(4) .memory-photo img {
+    object-position: center top;
+}
+
+.memory-scene:nth-of-type(5) .memory-photo img {
+    object-position: center top;
+}
+
+.memory-scene:nth-of-type(6) .memory-photo img {
+    object-position: center top;
+}
+
+.memory-scene:nth-of-type(7) .memory-photo img {
+    object-position: center top;
+}
+
+.memory-scene:nth-of-type(8) .memory-photo img {
+    object-position: center top;
+}
+
+.year {
+    position: absolute;
+    z-index: 5;
+    bottom: 10%;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(4rem,15vw,10rem);
+    color: rgba(255,255,255,.92);
+    text-shadow: 0 8px 30px rgba(87,35,60,.3);
+    letter-spacing: 5px;
+}
+
+/* FINAL INTRO */
+
+#introFinal {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 1.2s;
+}
+
+#introFinal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.final-content {
+    padding: 30px;
+}
+
+.final-content .archive {
+    letter-spacing: 6px;
+    font-size: .8rem;
+    color: #98677e;
+}
+
+.final-content h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    color: white;
+    font-size: clamp(3rem,10vw,6.5rem);
+    margin: 10px 0;
+    text-shadow: 0 10px 35px rgba(106,47,75,.18);
+}
+
+.final-content h2 {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #87576f;
+}
+
+.final-content p {
+    margin-top: 10px;
+    letter-spacing: 4px;
+    font-size: .85rem;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%,
+        rgba(255,255,255,.95),
+        transparent 25%),
+        radial-gradient(circle at 80% 70%,
+        rgba(244,202,226,.65),
+        transparent 25%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+}
+
+.hero-label {
+    display: inline-block;
+    padding: 8px 18px;
+    background: rgba(255,255,255,.65);
+    border-radius: 30px;
+    font-size: .75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: clamp(4rem,12vw,8rem);
+    line-height: .9;
+    color: #d88eaf;
+}
+
+.hero h1 span {
+    display: block;
+    color: #94617a;
+    font-size: .38em;
+    margin-top: 25px;
+    letter-spacing: 3px;
+}
+
+.hero-text {
+    max-width: 570px;
+    margin: 30px auto;
+    line-height: 1.9;
+    color: #8c6578;
+}
+
+.scroll-down {
+    display: inline-block;
+    color: #a66d88;
+    text-decoration: none;
+    border-bottom: 1px solid #dba9bf;
+    padding-bottom: 5px;
+}
+
+/* FLOATING DECORATIONS */
+
+.float {
+    position: absolute;
+    pointer-events: none;
+    opacity: .65;
+    animation: float 6s ease-in-out infinite;
+}
+
+.f1 {
+    top: 14%;
+    left: 8%;
+    font-size: 2.5rem;
+}
+
+.f2 {
+    right: 10%;
+    top: 25%;
+    font-size: 3rem;
+    animation-delay: 1s;
+}
+
+.f3 {
+    bottom: 15%;
+    left: 15%;
+    font-size: 2rem;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    50% {
+        transform: translateY(-18px) rotate(8deg);
+    }
+}
+
+/* SECTIONS */
+
+section {
+    padding: 100px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title small {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c88aa7;
+}
+
+.section-title h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem,6vw,5rem);
+    font-weight: 400;
+    color: #8e5d75;
+}
+
+/* TIMELINE */
+
+.timeline {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.memory-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 120px;
+}
+
+.memory-card:nth-child(even) .photo-wrap {
+    order: 2;
+}
+
+.photo-frame {
+    position: relative;
+    background: white;
+    padding: 12px 12px 55px;
+    border-radius: 5px;
+    box-shadow: 0 25px 60px rgba(133,72,101,.15);
+    transform: rotate(-2deg);
+    transition: .4s;
+}
+
+.memory-card:nth-child(even) .photo-frame {
+    transform: rotate(2deg);
+}
+
+.photo-frame:hover {
+    transform: rotate(0) scale(1.025);
+}
+
+/* FACE-SAFE TIMELINE IMAGES */
+
+.photo-frame img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+.photo-caption {
+    position: absolute;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #9a7185;
+}
+
+.memory-copy .big-year {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(4rem,10vw,7rem);
+    color: #efbdd2;
+    line-height: 1;
+}
+
+.memory-copy h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #8c5972;
+    margin: 12px 0;
+}
+
+.memory-copy p {
+    line-height: 1.9;
+    color: #8b6c7b;
+}
+
+/* GALLERY */
+
+.gallery-section {
+    background: rgba(255,255,255,.45);
+}
+
+.gallery {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border: 10px solid white;
+    box-shadow: 0 15px 35px rgba(130,75,101,.12);
+    min-height: 300px;
+    background: #f8dce8;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Keep faces toward top */
+    object-position: center top;
+
+    transition: .6s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* LETTER */
+
+.letter-section {
+    display: flex;
+    justify-content: center;
+}
+
+.letter {
+    max-width: 760px;
+    background: rgba(255,255,255,.8);
+    padding: 70px;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(139,75,106,.12);
+    position: relative;
+}
+
+.letter::before {
+    content: "♡";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: #f5c6da;
+    color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.7rem;
+}
+
+.letter h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #986079;
+    margin-bottom: 30px;
+}
+
+.letter p {
+    line-height: 2;
+    margin-bottom: 18px;
+}
+
+.signature {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #c07999;
+    margin-top: 35px;
+}
+
+/* ENDING */
+
+.ending {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, transparent, #f7cada);
+}
+
+.ending h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem,8vw,6rem);
+    font-weight: 400;
+    color: white;
+    text-shadow: 0 8px 25px rgba(124,68,95,.18);
+}
+
+.ending p {
+    margin-top: 20px;
+    color: #91667a;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #f7cada;
+    color: #a16d84;
+    font-size: .8rem;
+}
+
+/* HEARTS */
+
+.heart {
+    position: fixed;
+    z-index: 100;
+    bottom: -30px;
+    pointer-events: none;
+    animation: rise linear forwards;
+    color: rgba(255,151,194,.55);
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* MUSIC BUTTON */
+
+.music-control {
+    position: fixed;
+    left: 25px;
+    bottom: calc(25px + env(safe-area-inset-bottom));
+    width: 58px;
+    height: 58px;
+    border: 2px solid rgba(255,255,255,.85);
+    border-radius: 50%;
+    background: linear-gradient(145deg,#ffffff,#ffe1ee,#f5e4ff);
+    box-shadow: 0 10px 30px rgba(157,82,118,.2);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.intro-active .music-control {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* BUNNY */
+
+.jk-secret {
+    position: fixed;
+    right: 25px;
+    bottom: calc(25px + env(safe-area-inset-bottom));
+    width: 72px;
+    height: 72px;
+    border: 2px solid rgba(255,255,255,.85);
+    border-radius: 50%;
+    background: linear-gradient(145deg,#ffffff,#ffdcea,#f3ddff);
+    box-shadow:
+        0 10px 30px rgba(157,82,118,.25),
+        0 0 25px rgba(255,182,213,.45);
+    font-size: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 500;
+    animation: bunnyBounce 2.5s ease-in-out infinite;
+}
+
+@keyframes bunnyBounce {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+body.intro-active .jk-secret {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* JUNGKOOK POPUP */
+
+.jk-popup {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:
+        max(10px, env(safe-area-inset-top))
+        10px
+        max(10px, env(safe-area-inset-bottom));
+    background: rgba(91,46,69,.58);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .35s ease, visibility .35s ease;
+    overflow: hidden;
+}
+
+.jk-popup.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.jk-window {
+    position: relative;
+    width: min(94vw,450px);
+    height: calc(
+        100dvh
+        - 20px
+        - env(safe-area-inset-top)
+        - env(safe-area-inset-bottom)
+    );
+    max-height: 850px;
+    border-radius: 30px;
+    background: linear-gradient(145deg,#fffafd,#ffe4f0,#f7e5ff);
+    box-shadow: 0 30px 100px rgba(66,24,46,.35);
+    overflow: hidden;
+}
+
+.jk-scroll {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 55px 28px calc(100px + env(safe-area-inset-bottom));
+    text-align: center;
+    scrollbar-width: none;
+}
+
+.jk-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.jk-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    z-index: 100;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,.92);
+    color: #9d607d;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.jk-sparkle {
+    color: #e59abb;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+}
+
+.jk-small {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #b07692;
+    margin-bottom: 15px;
+}
+
+.jk-window h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem,9vw,3rem);
+    line-height: .95;
+    font-weight: 400;
+    color: #d47da5;
+    margin-bottom: 30px;
+}
+
+.jk-photo {
+    width: 88%;
+    margin: 0 auto 35px;
+    padding: 9px 9px 42px;
+    background: white;
+    box-shadow: 0 18px 45px rgba(128,68,96,.18);
+    transform: rotate(-2deg);
+}
+
+.jk-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.jk-warning {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #d36e9c;
+    margin-bottom: 18px;
+}
+
+.jk-text {
+    color: #835f71;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0 auto 25px;
+}
+
+.jk-side-effects {
+    padding: 22px 16px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.62);
+    color: #93687c;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.jk-side-effects strong,
+.jk-side-effects span {
+    display: block;
+}
+
+.jk-divider {
+    margin: 25px 0;
+    color: #e296b8;
+    font-size: 26px;
+}
+
+.jk-final {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    color: #ad6688;
+    margin-bottom: 18px;
+}
+
+.jk-from {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #9b7788;
+}
+
+.jk-lol {
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+.jk-bottom-space {
+    height: 120px;
+}
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+    section {
+        padding: 80px 22px;
+    }
+
+    .memory-photo {
+        width: 78vw;
+        height: 58vh;
+    }
+
+    .memory-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 90px;
+    }
+
+    .memory-card:nth-child(even) .photo-wrap {
+        order: 0;
+    }
+
+    .photo-frame img {
+        height: 430px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .letter {
+        padding: 55px 28px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .memory-photo {
+        width: 82vw;
+        height: min(58vh,520px);
+        padding: 10px 10px 58px;
+    }
+
+    .year {
+        bottom: 12%;
+        font-size: 4.2rem;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        min-height: 350px;
+    }
+
+    .photo-frame img {
+        height: 400px;
+    }
+
+    .music-control {
+        width: 55px;
+        height: 55px;
+        left: 18px;
+    }
+
+    .jk-secret {
+        width: 68px;
+        height: 68px;
+        right: 18px;
+        font-size: 32px;
+    }
+
+    .jk-window {
+        width: 100%;
+        border-radius: 28px;
+    }
+
+    .jk-scroll {
+        padding: 58px 20px 130px;
+    }
+}
+
+</style>
+</head>
+
+
+<body class="intro-active">
+
+<audio id="memoryMusic" preload="auto" loop>
+    <source src="danu-memory.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- INTRO -->
+
+<div id="intro">
+
+    <div class="intro-glow"></div>
+
+    <div class="intro-start" id="introStart">
+
+        <small>A little place made for</small>
+
+        <h1>Danu ♡</h1>
+
+        <p>Some memories deserve to stay.</p>
+
+        <button class="begin-btn" onclick="startMemories()">
+            Begin ♡
+        </button>
+
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2021.jpg" alt="2021 Memory">
+        </div>
+        <div class="year">2021</div>
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2022.jpg" alt="2022 Memory">
+        </div>
+        <div class="year">2022</div>
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2023.jpg" alt="2023 Memory">
+        </div>
+        <div class="year">2023</div>
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2024.jpg" alt="2024 Memory">
+        </div>
+        <div class="year">2024</div>
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2025.jpg" alt="2025 Memory">
+        </div>
+        <div class="year">2025</div>
+    </div>
+
+
+    <div class="memory-scene">
+        <div class="memory-photo">
+            <img src="2026.jpg" alt="2026 Memory">
+        </div>
+        <div class="year">2026</div>
+    </div>
+
+
+    <div id="introFinal">
+
+        <div class="final-content">
+
+            <div class="archive">
+                2021 — 2026
+            </div>
+
+            <h1>
+                Happy Birthday<br>
+                Danu ♡
+            </h1>
+
+            <h2>Chapter 21</h2>
+
+            <p>28 • 09 • 2026</p>
+
+            <button class="open-btn" onclick="openWebsite()">
+                Open Your Memories ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<main>
+
+<section class="hero">
+
+    <span class="float f1">♡</span>
+    <span class="float f2">✿</span>
+    <span class="float f3">♡</span>
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            Memory Archive • 2021 — 2026
+        </div>
+
+        <h1>
+            DANU
+            <span>Twenty One ♡</span>
+        </h1>
+
+        <p class="hero-text">
+            A tiny corner of the internet filled with
+            moments, pictures, laughter and memories
+            that deserve to stay a little longer.
+        </p>
+
+        <a href="#memories" class="scroll-down">
+            Go back in time ↓
+        </a>
+
+    </div>
+
+</section>
+
+
+<section id="memories">
+
+<div class="section-title">
+    <small>Our little timeline</small>
+    <h2>Through the Years</h2>
+</div>
+
+<div class="timeline">
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2021.jpg" alt="2021">
+            <div class="photo-caption">2021 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2021</div>
+        <h3>Where these memories begin.</h3>
+        <p>
+            Add your own little memory about 2021 here.
+            You can write something funny, sweet,
+            embarrassing, or something only the two
+            of you would understand.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2022.jpg" alt="2022">
+            <div class="photo-caption">2022 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2022</div>
+        <h3>Another year, another hundred memories.</h3>
+        <p>
+            Replace this with your 2022 memory.
+            Maybe something that still makes both
+            of you laugh whenever you remember it.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2023.jpg" alt="2023">
+            <div class="photo-caption">2023 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2023</div>
+        <h3>Different days. Same us.</h3>
+        <p>
+            Put your 2023 memory here.
+            Sometimes the most ordinary moments
+            become the ones we remember.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2024.jpg" alt="2024">
+            <div class="photo-caption">Danu • 2024 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2024</div>
+        <h3>A little Danu moment ♡</h3>
+        <p>
+            One year, one picture,
+            and still part of the story.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2025.jpg" alt="2025">
+            <div class="photo-caption">2025 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2025</div>
+        <h3>And the memories continued.</h3>
+        <p>
+            Add your favourite 2025 moment here.
+            This could even be a little inside joke
+            between you and Danu.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="memory-card">
+
+    <div class="photo-wrap">
+        <div class="photo-frame">
+            <img src="2026.jpg" alt="2026">
+            <div class="photo-caption">2026 ♡</div>
+        </div>
+    </div>
+
+    <div class="memory-copy">
+        <div class="big-year">2026</div>
+        <h3>Look how far we've come.</h3>
+        <p>
+            And now we're here.
+            Another year, another chapter,
+            and hopefully many more ridiculous
+            pictures and memories still waiting for us.
+        </p>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section class="gallery-section">
+
+<div class="section-title">
+    <small>Pictures worth keeping</small>
+    <h2>Little Moments ♡</h2>
+</div>
+
+<div class="gallery">
+
+    <div class="gallery-item">
+        <img src="2021.jpg" alt="2021">
+    </div>
+
+    <div class="gallery-item">
+        <img src="2022.jpg" alt="2022">
+    </div>
+
+    <div class="gallery-item">
+        <img src="2023.jpg" alt="2023">
+    </div>
+
+    <div class="gallery-item">
+        <img src="2024.jpg" alt="2024">
+    </div>
+
+    <div class="gallery-item">
+        <img src="2025.jpg" alt="2025">
+    </div>
+
+    <div class="gallery-item">
+        <img src="2026.jpg" alt="2026">
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- LETTER -->
+
+<section class="letter-section">
+
+<div class="letter">
+
+    <h2>Dear Danu,</h2>
+
+    <p>Happy 21st birthday ♡</p>
+
+    <p>
+        I made this little website because somehow
+        a normal birthday message didn't feel like
+        enough for all the memories we've collected
+        over the years.
+    </p>
+
+    <p>
+        From 2021 to 2026, there have been so many
+        random moments, pictures, conversations and
+        memories that became part of our story
+        without us even realizing it.
+    </p>
+
+    <p>
+        I hope when you look through this, you
+        remember not only the pictures, but everything
+        happening behind them — the laughter, the chaos,
+        and all the little moments we probably thought
+        were completely ordinary at the time.
+    </p>
+
+    <p>
+        Here's to 21, and to all the memories
+        we haven't made yet.
+    </p>
+
+    <div class="signature">
+        With love,<br>
+        Sofia ♡
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- END -->
+
+<section class="ending">
+
+<div>
+
+    <h2>
+        Happy 21st,<br>
+        Danu ♡
+    </h2>
+
+    <p>28 September 2026</p>
+
+    <p>2021 — forever.</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+    Made with ♡ for Danu • Sofia • 2026
+</footer>
+
+
+<!-- MUSIC -->
+
+<button
+    class="music-control"
+    id="musicButton"
+    onclick="toggleMusic()">
+
+    ♫
+
+</button>
+
+
+<!-- BUNNY -->
+
+<button
+    class="jk-secret"
+    onclick="openJungkook()">
+
+    🐰
+
+</button>
+
+
+<!-- JUNGKOOK POPUP -->
+
+<div class="jk-popup" id="jkPopup">
+
+<div class="jk-window">
+
+<button class="jk-close" onclick="closeJungkook()">
+    ×
+</button>
+
+<div class="jk-scroll">
+
+<div class="jk-sparkle">
+    ✦ ♡ ✦
+</div>
+
+<p class="jk-small">
+    DANU'S EMERGENCY HAPPINESS KIT
+</p>
+
+<h2>
+    EMERGENCY<br>
+    JUNGKOOK 🐰
+</h2>
+
+<div class="jk-photo">
+    <img src="jungkook.jpg" alt="Jungkook">
+</div>
+
+<p class="jk-warning">
+    🚨 IMPORTANT MEDICAL NOTICE 🚨
+</p>
+
+<p class="jk-text">
+    Doctor's orders:
+    one Jungkook a day to maintain
+    maximum happiness levels.
+</p>
+
+<div class="jk-side-effects">
+
+<strong>Possible side effects:</strong>
+
+<span>♡ uncontrollable smiling</span>
+<span>♡ screaming</span>
+<span>♡ staring at the screen</span>
+<span>♡ temporary delusion</span>
+<span>♡ saying "OMG JUNGKOOK" repeatedly</span>
+
+</div>
+
+<div class="jk-divider">♡</div>
+
+<p class="jk-final">
+    Happy 21st Birthday,<br>
+    Danu ♡
+</p>
+
+<p class="jk-from">
+    From Sofia...
+    <br><br>
+    and this man who has absolutely
+    no idea this website exists.
+</p>
+
+<div class="jk-lol">
+    😭💗
+</div>
+
+<div class="jk-bottom-space"></div>
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+const scenes =
+    document.querySelectorAll(".memory-scene");
+
+const introStart =
+    document.getElementById("introStart");
+
+const introFinal =
+    document.getElementById("introFinal");
+
+const intro =
+    document.getElementById("intro");
+
+const music =
+    document.getElementById("memoryMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const jkPopup =
+    document.getElementById("jkPopup");
+
+let currentScene = 0;
+
+
+/* START */
+
+function startMemories() {
+
+    music.volume = 0.7;
+
+    music.play().catch(() => {});
+
+    introStart.classList.add("hide");
+
+    setTimeout(playScene,1000);
+}
+
+
+/* MEMORY SCENES */
+
+function playScene() {
+
+    if(currentScene > 0) {
+
+        scenes[currentScene - 1]
+            .classList.remove("active");
+    }
+
+    if(currentScene < scenes.length) {
+
+        scenes[currentScene]
+            .classList.add("active");
+
+        currentScene++;
+
+        setTimeout(playScene,4500);
+
+    } else {
+
+        setTimeout(() => {
+
+            introFinal.classList.add("active");
+
+        },800);
+    }
+}
+
+
+/* OPEN WEBSITE */
+
+function openWebsite() {
+
+    intro.classList.add("hide");
+
+    document.body
+        .classList.remove("intro-active");
+
+    setTimeout(() => {
+
+        intro.style.display = "none";
+
+    },1300);
+}
+
+
+/* MUSIC */
+
+function toggleMusic() {
+
+    if(music.paused) {
+
+        music.play();
+
+        musicButton.innerHTML = "♫";
+
+    } else {
+
+        music.pause();
+
+        musicButton.innerHTML = "▶";
+    }
+}
+
+
+/* HEARTS */
+
+function createHeart() {
+
+    if(
+        document.body
+        .classList
+        .contains("intro-active")
+    ) return;
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        Math.random() > .5
+        ? "♡"
+        : "♥";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (Math.random() * 15 + 10) + "px";
+
+    heart.style.animationDuration =
+        (Math.random() * 4 + 6) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    },10000);
+}
+
+setInterval(createHeart,1100);
+
+
+/* JUNGKOOK */
+
+function openJungkook() {
+
+    const scrollArea =
+        jkPopup.querySelector(".jk-scroll");
+
+    jkPopup.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+
+    scrollArea.scrollTop = 0;
+}
+
+function closeJungkook() {
+
+    jkPopup.classList.remove("active");
+
+    document.body.style.overflow = "";
+}
+
+jkPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if(event.target === this) {
+            closeJungkook();
+        }
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if(event.key === "Escape") {
+            closeJungkook();
+        }
+    }
+);
+
+</script>
+
+</body>
+</html>
